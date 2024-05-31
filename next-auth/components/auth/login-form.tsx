@@ -20,7 +20,10 @@ import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
+import { useSearchParams } from "next/navigation";
 export const LoginForm = () => {
+  const searchParams = useSearchParams();
+  const urlError = searchParams.get("error") === "OAuthAccountNotLinked"? "Email alreaddy in use":"";
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -89,7 +92,7 @@ export const LoginForm = () => {
               )}
             />
           </div>
-          <FormError message={error}/>
+          <FormError message={error || urlError}/>
           <FormSuccess message={success}/>
           <Button disabled={isPending} type="submit" className="w-full">
             Login
