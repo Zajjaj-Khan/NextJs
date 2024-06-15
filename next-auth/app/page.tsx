@@ -20,9 +20,7 @@ export default function Home() {
           A simple NextJS Authentication System
         </p>
         <div>
-          <LoginInButton
-       
-          >
+          <LoginInButton>
             <Button variant="secondary" size="lg">
               Sign In
             </Button>
